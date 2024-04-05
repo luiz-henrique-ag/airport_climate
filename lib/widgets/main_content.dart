@@ -16,10 +16,7 @@ Weather weather = Weather(
 
 
 class MainContent extends StatefulWidget{
-  MainContent({super.key, required this.airport, required this.weather});
-  
-  Weather weather;
-  Airport airport;
+  const MainContent({super.key});
   
   @override
   State<MainContent> createState() => _MainContentState();

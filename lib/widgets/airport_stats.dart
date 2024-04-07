@@ -1,85 +1,154 @@
+import 'package:airport_climate/models/airport.dart';
 import 'package:flutter/material.dart';
 
 class AirportStats extends StatelessWidget {
-  const AirportStats({super.key});
+  final Airport? currentAirport;
+  const AirportStats({super.key, this.currentAirport});
 
   @override
   Widget build(BuildContext context) {
-    return const Expanded(
-      flex: 4,
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Row(
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.only(right: 8.0),
-                          child: Text(
-                            "SBMK",
-                            style: TextStyle(
-                              fontSize: 48,
-                              fontWeight: FontWeight.bold
-                            ),
+    // Verifica se currentAirport é nulo antes de acessar suas propriedades
+    if (currentAirport == null || currentAirport!.icaoCode.isEmpty) {
+      return Expanded(
+        flex: 6,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              //Row(
+              //children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(right: 8.0),
+                        child: Text(
+                          "",
+                          style: const TextStyle(
+                            fontSize: 30,
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
-                        Icon(
-                          Icons.airplanemode_active,
-                          size: 48,
-                        )
-                      ],
-                    ),
-                    Text(
-                      "Aeroporto de Montes Claros - Mário Ribeiro",
-                      style: TextStyle(
-                        fontSize: 12
                       ),
-                    ),
-                    Text(
-                      "MOC",
-                      style: TextStyle(
-                        fontSize: 12
+                      const Icon(
+                        Icons.airplanemode_active,
+                        size: 48,
+                      )
+                    ],
+                  ),
+                  Text(
+                    "",
+                    style: const TextStyle(fontSize: 12),
+                  ),
+                  Text(
+                    "",
+                    style: const TextStyle(fontSize: 12),
+                  ),
+                  const Text(
+                    "Brasil",
+                    style: TextStyle(fontSize: 12),
+                  ),
+                  Row(
+                    children: [
+                      const Padding(
+                        padding: EdgeInsets.only(right: 8.0),
+                        child: Icon(Icons.location_on_outlined),
                       ),
-                    ),
-                    Text(
-                      "Brasil",
-                      style: TextStyle(
-                        fontSize: 12
-                      ),
-                    ),
-                    Row(
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.only(right: 8.0),
-                          child: Icon(Icons.location_on_outlined),
+                      Text(
+                        "",
+                        style: const TextStyle(fontSize: 12),
+                      )
+                    ],
+
+                    ///)
+                    //],
+                  )
+                ],
+              ),
+              const SizedBox(
+                  height: 10), // Adiciona um espaçamento entre os elementos
+              const Text(
+                "Condição de Voo",
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              ),
+              const Text("Muito Bom")
+            ],
+          ),
+        ),
+      );
+    }
+
+    return Expanded(
+      flex: 6,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            //Row(
+            //children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(right: 8.0),
+                      child: Text(
+                        currentAirport!.icaoCode.toString(),
+                        style: const TextStyle(
+                          fontSize: 30,
+                          fontWeight: FontWeight.bold,
                         ),
-                        Text("-16.706919, -43.818901")
-                      ],
+                      ),
+                    ),
+                    const Icon(
+                      Icons.airplanemode_active,
+                      size: 48,
                     )
                   ],
+                ),
+                Text(
+                  currentAirport!.name.toString(),
+                  style: const TextStyle(fontSize: 12),
+                ),
+                Text(
+                  currentAirport!.iataCode.toString(),
+                  style: const TextStyle(fontSize: 12),
+                ),
+                const Text(
+                  "Brasil",
+                  style: TextStyle(fontSize: 12),
+                ),
+                Row(
+                  children: [
+                    const Padding(
+                      padding: EdgeInsets.only(right: 8.0),
+                      child: Icon(Icons.location_on_outlined),
+                    ),
+                    Text(
+                      currentAirport!.location.toString(),
+                      style: const TextStyle(fontSize: 12),
+                    )
+                  ],
+
+                  ///)
+                  //],
                 )
               ],
             ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Condição de Voo",
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold
-                  ),
-                ),
-                Text("Muito Bom")
-              ],
-            )
+            const SizedBox(
+                height: 10), // Adiciona um espaçamento entre os elementos
+            const Text(
+              "Condição de Voo",
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            ),
+            const Text("Muito Bom")
           ],
         ),
       ),

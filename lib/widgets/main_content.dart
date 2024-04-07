@@ -4,20 +4,13 @@ import 'package:airport_climate/widgets/airport_stats.dart';
 import 'package:airport_climate/widgets/climate_stats.dart';
 import 'package:flutter/material.dart';
 
-Weather weather = Weather(
-  condition: "ps",
-  atmosphericPressure: "1014",
-  temperature: 28,
-  moisture: 74,
-  wind: 29,
-  visibility: "9000",
-  conditionDesc: "Predomínio de Sol"
-);
+class MainContent extends StatefulWidget {
+  final Airport? selectedAirport;
+  final Weather? selectedWeather;
 
+  MainContent({required this.selectedAirport, this.selectedWeather, Key? key})
+      : super(key: key);
 
-class MainContent extends StatefulWidget{
-  const MainContent({super.key});
-  
   @override
   State<MainContent> createState() => _MainContentState();
 }
@@ -30,8 +23,19 @@ class _MainContentState extends State<MainContent> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          ClimateStats(weather: weather),
-          const AirportStats()
+          ClimateStats(
+              weather: widget.selectedWeather ??
+                  Weather(
+                      atmosphericPressure: '',
+                      visibility: '',
+                      wind: '',
+                      moisture: '',
+                      condition: '',
+                      temperature: '',
+                      conditionDesc: '')), // Use widget.selectedWeather
+          AirportStats(
+            currentAirport: widget.selectedAirport,
+          ),
         ],
       ),
     );

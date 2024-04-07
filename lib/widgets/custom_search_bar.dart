@@ -15,39 +15,37 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         TextButton(
-          onPressed: () => showDialog(
-            context: context,
-            builder: (context) => Dialog(
-              alignment: Alignment.center,
-              child: Container(
-                padding: const EdgeInsets.all(20.0),
-                height: 250,
-                width: 250,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    const Text(
-                      "Buscar Localização",
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold
-                      ),
-                    ),
-                    TextField(
-                      decoration: InputDecoration(
-                        hintText: "Buscar",
-                        suffixIcon: const Icon(Icons.search),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(20)
-                        ),
-                        focusColor: Colors.blue
-                      ),
-                    )
-                  ],
-                )
-              ),
-            ), 
-          ),
+          // onPressed:
+          // () => showDialog(
+          //   context: context,
+          //   builder: (context) => Dialog(
+          //     alignment: Alignment.center,
+          //     child: Container(
+          //         padding: const EdgeInsets.all(20.0),
+          //         height: 250,
+          //         width: 250,
+          //         child: Column(
+          //           crossAxisAlignment: CrossAxisAlignment.center,
+          //           children: [
+          //             const Text(
+          //               "Buscar Localização",
+          //               style: TextStyle(
+          //                   fontSize: 20, fontWeight: FontWeight.bold),
+          //             ),
+          //             TextField(
+          //               decoration: InputDecoration(
+          //                   hintText: "Buscar",
+          //                   suffixIcon: const Icon(Icons.search),
+          //                   border: OutlineInputBorder(
+          //                       borderRadius: BorderRadius.circular(20)),
+          //                   focusColor: Colors.blue),
+          //             ),
+          //             const Expanded(flex: 10, child: AirportList())
+          //           ],
+          //         )),
+          //   ),
+          // ),
+          onPressed: () => {Navigator.pushNamed(context, '/search')},
           child: const Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [

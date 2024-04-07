@@ -16,8 +16,7 @@ class ClimateStats extends StatelessWidget {
         decoration: const BoxDecoration(
           borderRadius: BorderRadius.only(
               bottomLeft: Radius.circular(30),
-              bottomRight: Radius.circular(30)
-            ),
+              bottomRight: Radius.circular(30)),
           boxShadow: [
             BoxShadow(
                 blurRadius: 10,
@@ -51,17 +50,13 @@ class ClimateStats extends StatelessWidget {
                     Text(
                       "${weather.temperature}º",
                       style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 48,
-                        fontWeight: FontWeight.bold
-                      ),
+                          color: Colors.white,
+                          fontSize: 48,
+                          fontWeight: FontWeight.bold),
                     ),
                     Text(
                       weather.conditionDesc,
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 12
-                      ),
+                      style: const TextStyle(color: Colors.white, fontSize: 12),
                     )
                   ],
                 )
@@ -72,70 +67,64 @@ class ClimateStats extends StatelessWidget {
               children: [
                 Column(
                   children: [
-                    const Icon(Icons.air, color: Colors.white,),
+                    const Icon(
+                      Icons.air,
+                      color: Colors.white,
+                    ),
                     const Text(
                       "Vento",
                       style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 10,
-                        fontWeight: FontWeight.w300
-                      ),
+                          color: Colors.white,
+                          fontSize: 10,
+                          fontWeight: FontWeight.w300),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 8.0),
-                      child: Text(
-                        "${weather.wind} km/h",
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 12
-                        )
-                      ),
+                      child: Text("${weather.wind} km/h",
+                          style: const TextStyle(
+                              color: Colors.white, fontSize: 12)),
                     )
                   ],
                 ),
                 Column(
                   children: [
-                    const Icon(Icons.water_drop_outlined, color: Colors.white,),
+                    const Icon(
+                      Icons.water_drop_outlined,
+                      color: Colors.white,
+                    ),
                     const Text(
                       "Umidade",
                       style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 10,
-                        fontWeight: FontWeight.w300
-                      ),
+                          color: Colors.white,
+                          fontSize: 10,
+                          fontWeight: FontWeight.w300),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 8.0),
-                      child: Text(
-                        "${weather.moisture}%",
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 12
-                        )
-                      ),
+                      child: Text("${weather.moisture}%",
+                          style: const TextStyle(
+                              color: Colors.white, fontSize: 12)),
                     )
                   ],
                 ),
                 Column(
                   children: [
-                    const Icon(Icons.visibility_outlined, color: Colors.white,),
+                    const Icon(
+                      Icons.visibility_outlined,
+                      color: Colors.white,
+                    ),
                     const Text(
                       "Visibilidade",
                       style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 10,
-                        fontWeight: FontWeight.w300
-                      ),
+                          color: Colors.white,
+                          fontSize: 10,
+                          fontWeight: FontWeight.w300),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 8.0),
-                      child: Text(
-                        "${weather.visibility} m",
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 12
-                        )
-                      ),
+                      child: Text("${weather.visibility} m",
+                          style: const TextStyle(
+                              color: Colors.white, fontSize: 12)),
                     )
                   ],
                 )

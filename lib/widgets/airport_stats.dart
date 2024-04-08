@@ -137,9 +137,14 @@ class AirportStats extends StatelessWidget {
                           style: const TextStyle(fontSize: 12),
                         )
                       ],
-        
-                      ///)
-                      //],
+                    ),
+                    Row(
+                      children: [
+                        Text(
+                          currentAirport!.municipality.toString(),
+                          style: const TextStyle(fontSize: 12),
+                        )
+                      ],
                     )
                   ],
                 ),

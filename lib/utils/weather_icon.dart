@@ -4,14 +4,14 @@ import 'package:flutter/material.dart';
 class WeatherIcon{
   static Widget getWeatherIcon(Weather weather){
     String condition = weather.conditionDesc;
-    if(condition.contains("chuv")){
+    if(condition.toLowerCase().contains("chuv")){
       return const Icon(
         Icons.water_drop_sharp,
         size: 100,
         color: Colors.white,
       );
     }
-    if(condition.contains("sol")){
+    if(condition.toLowerCase().contains("sol")){
       return const Icon(
         Icons.sunny,
         size: 100,

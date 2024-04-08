@@ -4,14 +4,14 @@ import 'package:airport_climate/models/weather.dart';
 import 'package:airport_climate/widgets/main_content.dart';
 import 'package:flutter/material.dart';
 
-class SearchComponent extends StatefulWidget {
-  const SearchComponent({Key? key}) : super(key: key);
+class SearchPage extends StatefulWidget {
+  const SearchPage({Key? key}) : super(key: key);
 
   @override
-  State<SearchComponent> createState() => _SearchComponentState();
+  State<SearchPage> createState() => _SearchPageState();
 }
 
-class _SearchComponentState extends State<SearchComponent> {
+class _SearchPageState extends State<SearchPage> {
   final TextEditingController _cityInputController = TextEditingController();
   final TextEditingController _airportInputController = TextEditingController();
 
@@ -57,16 +57,33 @@ class _SearchComponentState extends State<SearchComponent> {
                 ),
               ),
             ),
-            ElevatedButton(
-              onPressed: () {
-                String city = _cityInputController.text;
-                setState(() {
-                  _futureAirportsByCity = Airport.findAirportByCity(city);
-                });
-              },
-              child: const Text("Pesquisar"),
+            const SizedBox(height: 10),
+            SizedBox(
+              width: 250,
+              height: 60,
+              child: TextButton(
+                onPressed: () {
+                  String city = _cityInputController.text;
+                  setState(() {
+                    _futureAirportsByCity = Airport.findAirportByCity(city);
+                  });
+                },
+                style: const ButtonStyle(
+                  backgroundColor: MaterialStatePropertyAll<Color>(Color.fromARGB(255, 23, 81, 175)),
+                ), 
+                child: const Text(
+                  "Pesquisar", 
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Color.fromARGB(255, 255, 255, 255),
+                    fontSize: 18,
+                    fontWeight: FontWeight.w400,
+                    letterSpacing: 3
+                  )
+                )
+              ),
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 10),
             Expanded(
               child: FutureBuilder<List<Airport?>>(
                 future: _futureAirportsByCity,
@@ -87,21 +104,23 @@ class _SearchComponentState extends State<SearchComponent> {
                           return GestureDetector(
                               onTap: () async {
                                 //CHAMAR A API E MONTAR AS INFORMAÇÕES
-                                Weather? currentWeatherData =
-                                    await API.getAirportWeather(
-                                        snapshot.data![index]!.icaoCode);
+                                API.getAirportWeather(snapshot.data![index]!.icaoCode)
+                                    .then((value) => {
+                                          Navigator.of(context).push(
+                                            MaterialPageRoute(
+                                              builder: (context) => MainContent(
+                                                  selectedAirport:
+                                                      snapshot.data![index],
+                                                  selectedWeather: value),
+                                            ),
+                                          )
+                                        });
                                 //Navegar para a próxima rota ao clicar no Card
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => MainContent(
-                                        selectedAirport: snapshot.data![index],
-                                        selectedWeather: currentWeatherData),
-                                  ),
-                                );
                               },
                               child: Card(
+                                color: Color.fromARGB(255, 59, 176, 239),
                                 child: ListTile(
+                                  textColor: Colors.white,
                                   title: Text(snapshot.data![index]!.name),
                                   subtitle:
                                       Text(snapshot.data![index]!.municipality),

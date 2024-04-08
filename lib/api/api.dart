@@ -13,16 +13,17 @@ class API {
       final Map<String, dynamic> jsonResp = json.decode(res.body);
 
       if (jsonResp.isNotEmpty) {
-        return Weather(
-          moisture: jsonResp['moisture']?.toString() ?? '',
-          visibility: jsonResp['visibility']?.toString() ?? '',
+        Weather obj = Weather(
+          moisture: jsonResp['umidade'].toString(),
+          visibility: jsonResp['visibilidade'].toString(),
           atmosphericPressure:
-              jsonResp['atmospheric_pressure']?.toString() ?? '',
-          wind: jsonResp['wind']?.toString() ?? '',
-          condition: jsonResp['condition']?.toString() ?? '',
-          conditionDesc: jsonResp['condition_desc']?.toString() ?? '',
-          temperature: jsonResp['temperature']?.toString() ?? '',
+              jsonResp['pressao_atmosferica'].toString(),
+          wind: jsonResp['vento'].toString(),
+          condition: jsonResp['condicao'].toString(),
+          conditionDesc: jsonResp['condicao_desc'].toString(),
+          temperature: jsonResp['temp'].toString(),
         );
+        return obj;
       }
     }
     return null;

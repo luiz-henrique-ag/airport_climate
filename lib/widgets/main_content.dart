@@ -18,26 +18,30 @@ class MainContent extends StatefulWidget {
 class _MainContentState extends State<MainContent> {
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      flex: 14,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          ClimateStats(
-              weather: widget.selectedWeather ??
-                  Weather(
-                      atmosphericPressure: '',
-                      visibility: '',
-                      wind: '',
-                      moisture: '',
-                      condition: '',
-                      temperature: '',
-                      conditionDesc: '')), // Use widget.selectedWeather
-          AirportStats(
-            currentAirport: widget.selectedAirport,
+    return Column(
+      children: [
+        Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              ClimateStats(
+                  weather: widget.selectedWeather ??
+                    Weather(
+                        atmosphericPressure: '',
+                        visibility: '',
+                        wind: '',
+                        moisture: '',
+                        condition: '',
+                        temperature: '',
+                        conditionDesc: ''
+                    ),
+                  ),
+                   // Use widget.selectedWeather
+              AirportStats(
+                currentAirport: widget.selectedAirport,
+              ),
+            ],
           ),
-        ],
-      ),
+      ],
     );
   }
 }

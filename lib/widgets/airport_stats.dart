@@ -1,4 +1,5 @@
 import 'package:airport_climate/models/airport.dart';
+import 'package:airport_climate/utils/flight_condition.dart';
 import 'package:flutter/material.dart';
 
 class AirportStats extends StatelessWidget {
@@ -7,51 +8,56 @@ class AirportStats extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Verifica se currentAirport é nulo antes de acessar suas propriedades
-    if (currentAirport == null || currentAirport!.icaoCode.isEmpty) {
-      return const Column(
-        children: [
-          Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-              child: Column(
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  //Row(
-                  //children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                  Row(
                     children: [
-                      Row(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(right: 8.0),
-                            child: Text(
-                              "",
-                              style: const TextStyle(
-                                fontSize: 30,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
+                      Padding(
+                        padding: const EdgeInsets.only(right: 8.0),
+                        child: Text(
+                          currentAirport!.icaoCode.toString(),
+                          style: const TextStyle(
+                            fontSize: 30,
+                            fontWeight: FontWeight.bold,
                           ),
-                          const Icon(
-                            Icons.airplanemode_active,
-                            size: 48,
-                          )
-                        ],
+                        ),
                       ),
+                      const Icon(
+                        Icons.airplanemode_active,
+                        size: 48,
+                      )
+                    ],
+                  ),
+                  Text(
+                    currentAirport!.name.toString(),
+                    style: const TextStyle(fontSize: 12),
+                  ),
+                  
+                  (
+                    currentAirport?.iataCode.toString() != "NULL" ? 
                       Text(
-                        "",
-                        style: const TextStyle(fontSize: 12),
-                      ),
-                      Text(
-                        "",
-                        style: const TextStyle(fontSize: 12),
-                      ),
-                      const Text(
-                        "Brasil",
-                        style: TextStyle(fontSize: 12),
-                      ),
+                      currentAirport!.iataCode.toString(),
+                      style: const TextStyle(fontSize: 12),
+                      )
+                    :
+                      Text("")
+                  ),
+                  const Text(
+                    "Brasil",
+                    style: TextStyle(fontSize: 12),
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
                       Row(
                         children: [
                           const Padding(
@@ -59,98 +65,42 @@ class AirportStats extends StatelessWidget {
                             child: Icon(Icons.location_on_outlined),
                           ),
                           Text(
-                            "",
+                            currentAirport!.location.toString(),
                             style: const TextStyle(fontSize: 12),
-                          )
+                          ),
                         ],
-          
-                        ///)
-                        //],
+                      ),
+                      Text(
+                        currentAirport!.municipality.toString(),
+                        style: const TextStyle(fontSize: 12),
                       )
                     ],
                   ),
-                  const SizedBox(
-                      height: 10), // Adiciona um espaçamento entre os elementos
-                  const Text(
-                    "Condição de Voo",
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                  ),
-                  const Text("Muito Bom")
                 ],
               ),
-            ),
-        ],
-      );
-    }
-
-    return Column(
-      children: [
-        Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                //Row(
-                //children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Row(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(right: 8.0),
-                          child: Text(
-                            currentAirport!.icaoCode.toString(),
-                            style: const TextStyle(
-                              fontSize: 30,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                        const Icon(
-                          Icons.airplanemode_active,
-                          size: 48,
-                        )
-                      ],
+              const SizedBox(height: 10),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    "Condição de Voo",
+                    style: TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold
                     ),
-                    Text(
-                      currentAirport!.name.toString(),
-                      style: const TextStyle(fontSize: 12),
-                    ),
-                    Text(
-                      currentAirport!.iataCode.toString(),
-                      style: const TextStyle(fontSize: 12),
-                    ),
-                    const Text(
-                      "Brasil",
-                      style: TextStyle(fontSize: 12),
-                    ),
-                    Row(
-                      children: [
-                        const Padding(
-                          padding: EdgeInsets.only(right: 8.0),
-                          child: Icon(Icons.location_on_outlined),
-                        ),
-                        Text(
-                          currentAirport!.location.toString(),
-                          style: const TextStyle(fontSize: 12),
-                        )
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        Text(
-                          currentAirport!.municipality.toString(),
-                          style: const TextStyle(fontSize: 12),
-                        )
-                      ],
+                  ),
+                  Text(
+                    FlightCondition.analisarViabilidade(
+                      currentAirport?.weather?.condition,
+                      currentAirport?.weather?.visibility,
+                      currentAirport?.weather?.wind
                     )
-                  ],
-                ),
-              ],
-            ),
+                  )
+                ],
+              )
+            ],
           ),
+        ),
       ],
     );
   }

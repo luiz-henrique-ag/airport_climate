@@ -15,10 +15,11 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         TextButton(
-          onPressed: () => {Navigator.popUntil(context, ModalRoute.withName('/'))},
+          onPressed: () => { Navigator.pushNamed(context, '/search') },
           child: const Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
+              Text("Pesquisar", style: TextStyle(color: Colors.white)),
               Icon(Icons.search_sharp, color: Colors.white),
             ],
           ),

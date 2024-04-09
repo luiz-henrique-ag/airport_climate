@@ -93,4 +93,26 @@ class Airport {
 
     return null;
   }
+  
+  static Future<List<Airport?>> findAirportByName(String name) async {
+    final db = await Banco.instance.database;
+    String query = "SELECT * FROM airport_data WHERE name LIKE '%$name%'";
+    List<Map<String, Object?>> airports = await db.rawQuery(query);
+    List<Airport> airportsByName = [];
+    if (airports.isNotEmpty) {
+      for (Map<String, Object?> utemp in airports) {
+        airportsByName.add(Airport(
+          id: utemp['id'].toString(),
+          iataCode: utemp['iata_code'].toString(),
+          icaoCode: utemp['ident'].toString(),
+          name: utemp['name'].toString(),
+          location: utemp['coordinates'].toString(),
+          municipality: utemp['municipality'].toString(),
+        ));
+      }
+    }
+    return airportsByName;
+  }
 }
+
+
